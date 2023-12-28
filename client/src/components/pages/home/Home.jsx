@@ -1,15 +1,12 @@
-import home from './home.css'
-import { Search,Person } from "@mui/icons-material";
+import React from 'react'
+import TopBar from '../../topbar/TopBar.jsx'
 
-
-const Home=()=> {
-  return <div style={home}>
-    <div className='topbar'>
-      <Search/>
-      <Person/>
-      <h1>This is Home Page.</h1>
+const Home = () => {
+  return (
+    <div>
+        <TopBar/>
     </div>
-  </div>;
+  )
 }
 
 export default Home
