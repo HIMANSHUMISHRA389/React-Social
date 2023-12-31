@@ -6,20 +6,20 @@ const TopBar = () => {
     <div style={topbar}>
       <div className="topbarContainer">
         <div className="topbarLeft">
-          <span className="logo">ReactSocial</span>
+          <div>
+            <span className="logo">ReactSocial</span>
+          </div>
         </div>
-        <div className="topbarCentre">
-          <div className="topbarCenter">
-            <div className="searchBar">
-              <Search />
-              <input className="Search for friend,post or video"/>
-            </div>
+        <div className="topbarCenter">
+          <div className="searchBar">
+            <Search className='searchIcon'/>
+            <input placeholder="Search for friend,post or video" className='searchInput'/>
           </div>
         </div>
         <div className="topbarRight">
-          <div className="tobarLinks">
-            <span className="topbarLink">Home</span>
-            <span className="topbarLink">Contact</span>
+          <div className="topbarLinks">
+            <span className="topbarLink">HomePage</span>
+            <span className="topbarLink">Timeline</span>
           </div>
           <div className="topbarIcons">
             <div className="topbarIconsItems">
@@ -34,7 +34,7 @@ const TopBar = () => {
               <Notifications />
               <span className="topbarItemBadge">2</span>
             </div>
-            <img src="/assets/person/1.jpeg" />
+            <img alt='img' className="topbarImg" src="/assets/person/1.jpeg" />
           </div>
         </div>
       </div>
