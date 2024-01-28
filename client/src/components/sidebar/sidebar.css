@@ -2,6 +2,8 @@
   flex: 3;
   height: calc(99.5vh);
   overflow-y: scroll;
+  position: sticky;
+  top: 1%;
 }
 .sidebarList {
   padding: 20px;

@@ -22,15 +22,15 @@ const Share = () => {
             </div>
             <div className="shareOption">
               <Label htmlColor="blue" className="shareIcon" />
-              <span className="shareText">Photo or Video</span>
+              <span className="shareText">Tag</span>
             </div>
             <div className="shareOption">
               <Room htmlColor="green" className="shareIcon" />
-              <span className="shareText">Photo or Video</span>
+              <span className="shareText">Location</span>
             </div>
             <div className="shareOption">
               <EmojiEmotions className="shareIcon" htmlColor="goldenrod" />
-              <span className="shareText">Photo or Video</span>
+              <span className="shareText">Feelings</span>
             </div>
           </div>
           <button className="shareButton">Share</button>
