@@ -1,0 +1,76 @@
+* {
+  background-color: #f0f2f5;
+}
+
+.loginWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-top: 10vh;
+  height: 100%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.loginLeftDiv h1 {
+  color: #1877f2;
+  font-weight: bolder;
+}
+.loginLeftDiv p {
+  color: black;
+  font-weight: bolder;
+}
+.loginLeft {
+  flex: 6;
+  
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5;
+}
+.loginLeftDiv {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.loginLeftDiv h1 {
+  text-align: start;
+}
+.loginRight {
+  flex: 6;
+ 
+  height: 100%;
+  width: 80%;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 60%;
+}
+.inputB {
+  margin: 10px auto;
+  height: 40px;
+  border-radius: 7px;
+  background-color: white;
+  width: 90%;
+  text-align: center;
+  border-style: none;
+  border:1px solid  grey;
+}
+.inputB::placeholder {
+  margin-left: 20px;
+}
+.buttonB {
+  background-color: #1877f2;
+  color: white;
+}
+.buttonS {
+  background-color: #42b72a;
+  width: 50%;
+  margin: 0.6rem auto;
+  color: white;
+}
