@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
     console.log(user);
     res.status(200).json(user);
   } catch (error) {
-   res.status.json(error);
+   res.status(400).json(error);
   }
 });
 
@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    res.status.json(error)
+    res.status(400).json(error)
   }
 });
 module.exports = router;
