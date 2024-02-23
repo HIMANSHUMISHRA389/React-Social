@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const userRouter=require('./routes/users')
 const authRoute=require('./routes/auth')
+const postRouter=require("./routes/post")
 dotenv.config();
 const uri = process.env.MONGO_URL;
 
@@ -18,7 +19,7 @@ app.use(morgan("common"))
 //APIs
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRoute);
-
+app.use("/api/posts", postRouter);
 
 
 mongoose
