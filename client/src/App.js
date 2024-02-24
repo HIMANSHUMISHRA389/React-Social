@@ -1,16 +1,10 @@
-import Home from "./components/pages/home/Home.jsx";
-import Login from "./components/pages/login/login.jsx";
-import Register from "./components/pages/register/register.jsx";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Profile from "./pages/profile/Profile";
+import Register from "./pages/register/Register";
 
 function App() {
-  return (
-   <div>
-    {/* <Home/> */}
-
-    <Login/>
-    {/* <Register/> */}
-   </div>
-  );
+  return <Profile/>;
 }
 
 export default App;

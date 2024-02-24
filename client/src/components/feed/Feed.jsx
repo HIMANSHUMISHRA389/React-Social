@@ -1,18 +1,17 @@
-import React from 'react'
-import './feed.css'
-import Share from '../Share/Share'
-import Post from '../userPost/Post';
-import {Posts} from '../../dummyData.js'
-const Feed = () => {
+import Post from "../post/Post";
+import Share from "../share/Share";
+import "./feed.css";
+import { Posts } from "../../dummyData";
+
+export default function Feed() {
   return (
     <div className="feed">
-      <div className="feedWrapper"></div>
-      <Share />
-      {Posts.map((p, i) => (
-        <Post key={p.id} posts={p} />
-      ))}
+      <div className="feedWrapper">
+        <Share />
+        {Posts.map((p) => (
+          <Post key={p.id} post={p} />
+        ))}
+      </div>
     </div>
   );
 }
-
-export default Feed
