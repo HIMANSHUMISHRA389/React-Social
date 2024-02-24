@@ -1,6 +1,6 @@
 import React from "react";
-import "./Login.css";
-const Login = () => {
+import "./register.css";
+const Register = () => {
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -13,9 +13,15 @@ const Login = () => {
         <div className="loginRight">
           <div className="loginForm">
             <input type="text" className="inputB " placeholder="Username" />
+            <input type="text" className="inputB" placeholder="Email" />
             <input type="text" className="inputB" placeholder="Password" />
-            <button className="inputB buttonB">Login</button>
-            <button className="inputB buttonS">Sign Up</button>
+            <input
+              type="text"
+              className="inputB"
+              placeholder="Password Again"
+            />
+            <button className="inputB buttonB">Sign Up</button>
+            <button className="inputB buttonS">Login into Account</button>
           </div>
         </div>
       </div>
@@ -23,4 +29,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
