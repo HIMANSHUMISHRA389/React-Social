@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Post = require("../models/Post.model");
+const User = require("../models/User.model");
 //create a post
 router.post("/", async (req, res) => {
   try {
@@ -72,20 +73,41 @@ router.get("/:id", async (req, res) => {
   }
 });
 //get timeline posts
-router.get("/timeline/all", async (req, res) => {
- let postArray=[];
+router.get("/timeline/:userId", async (req, res) => {
+ 
  try {
-  const currentUser=await User.findById(req.body.userId);
+  console.log(req.params.userId)
+  const currentUser=await User.findById(req.params.userId);
+  console.log(currentUser)
   const userPosts=await Post.find({userId:currentUser._id});
+  console.log("step1",currentUser,userPosts)
   const friendPosts=await Promise.all(
     currentUser.followings.map((friendId)=>{
      return Post.find({userId:friendId})
     })
   )
-  res.json(userPosts.concat(...friendPosts))
+  console.log("step2");
+  res.status(200).json(userPosts.concat(...friendPosts))
  } catch (error) {
+  console.log("err")
   res.status(400).json(error)
  }
   
+});
+
+
+//get user's all posts
+router.get("/profile/:username", async (req, res) => {
+  try {
+    const user=await User.findOne({
+      username:req.params.username
+    })
+    const posts=await Post.find({userId:user._id})
+    res.status(200).json(posts)
+    
+  } catch (error) {
+    console.log("err");
+    res.status(400).json(error);
+  }
 });
 module.exports = router;
