@@ -55,10 +55,12 @@ const UserSchema = mongoose.Schema(
     },
     relationship:{
         type:Number,
-        enum:[1,2,3]
-    }
+        enum:[1,2,3],
+        default:1
+    },
   },
-  { timeStamps: true }
+  { timestamps: true }
+  
 );
 const User=mongoose.model("User", UserSchema);
 module.exports= User;

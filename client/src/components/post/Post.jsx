@@ -16,11 +16,11 @@ const PF = process.env.REACT_APP_PUBLIC_FOLDER
     setIsLiked(!isLiked)
   }
 
-const fetchPosts = async () => {
+const fetchUsers = async () => {
 
   try {
     const res = await fetch(
-      BASEURL + `users/${post.userId}`,
+      BASEURL + `users/?userId=${post.userId}`,
       {
         method: "GET",
         headers: {
@@ -29,7 +29,7 @@ const fetchPosts = async () => {
       }
     );
     const data = await res.json();
-    //console.log(data);
+    console.log(data);
     setUsers(data);
   } catch (error) {
     console.log(error);
@@ -37,10 +37,11 @@ const fetchPosts = async () => {
 };
 
 useEffect(() => {
-  fetchPosts();
+  fetchUsers();
 }, [post.userId]);
-
-  return (
+console.log(post)
+console.log(users)  
+return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">

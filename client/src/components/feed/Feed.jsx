@@ -9,6 +9,7 @@ export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
+    console.log(username)
     try {
       const res = username
         ? await fetch(BASEURL + "posts/profile/" + username, {
@@ -17,14 +18,14 @@ export default function Feed({ username }) {
               "Content-Type": "application/json",
             },
           })
-        : await fetch(BASEURL + "posts/timeline/65d8207caa06ba934122ed9d", {
+        : await fetch(BASEURL + "posts/timeline/65e1a66ce72c102c2d64ad49", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
           });
       const data = await res.json();
-      //console.log(data);
+      console.log(data);
       setPosts(data);
     } catch (error) {
       console.log(error);
