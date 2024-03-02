@@ -1,8 +1,19 @@
 import "./login.css";
-
+import { useContext, useRef } from "react";
+import { loginCall } from "../../apiCalls";
+import { AuthContext } from "../../components/context/AuthContexts";
 export default function Login() {
+  const email = useRef();
+  const password = useRef();
+  const { user,isFetching, error, dispatch } = useContext(AuthContext);
+  const submit = (e) => {
+    e.preventDefault();
+  
+    loginCall({ email:email.current.value, password:password.current.value }, dispatch);
+  };
+  console.log(user)
   return (
-    <div className="login">
+    <form className="login" onSubmit={submit}>
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">Lamasocial</h3>
@@ -12,8 +23,22 @@ export default function Login() {
         </div>
         <div className="loginRight">
           <div className="loginBox">
-            <input placeholder="Email" className="loginInput" />
-            <input placeholder="Password" className="loginInput" />
+            <input
+              name="email"
+              placeholder="Email"
+              type="email"
+              className="loginInput"
+              required
+              ref={email}
+            />
+            <input
+              placeholder="Password"
+              type="password"
+              className="loginInput"
+              required
+              minLength="6"
+              ref={password}
+            />
             <button className="loginButton">Log In</button>
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginRegisterButton">
@@ -22,6 +47,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
