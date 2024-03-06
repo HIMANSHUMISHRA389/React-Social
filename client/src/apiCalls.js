@@ -1,31 +1,41 @@
+
 const BASEURL = "http://localhost:8800/api/";
 
-export const loginCall = async (userCredentials, dispatch) => {
+export const LoginCall = async (userCredentials, dispatch) => {
   dispatch({
     type: "LOGIN_START",
   });
+  
+  //auth/login
+
   try {
     console.log(userCredentials);
-     const res = await fetch(BASEURL+ "auth/login", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify({
-         email: "hello",
-         password:"123",
-       }),
-     });
-    console.log(userCredentials);
+    // Define the URL to which you want to send the POST request
+    const url = BASEURL + "auth/login";
+
+    // Make the POST request using fetch
+    const res = await fetch(url, {
+      method: "POST", // Specify the request method
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // Convert data to JSON format
+        email: userCredentials.email,
+        password: userCredentials.password,
+      }),
+    });
     const res1 = await res.json();
     console.log(res1);
+
     dispatch({
       type: "LOGIN_SUCCESS",
       payload: res.data,
     });
+  
   } catch (error) {
     dispatch({
-      type: "LOGIN_SUCCESS",
+      type: "LOGIN_FAILED",
       payload: error,
     });
   }

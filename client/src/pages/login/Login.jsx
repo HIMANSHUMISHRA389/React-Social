@@ -1,17 +1,20 @@
 import "./login.css";
 import { useContext, useRef } from "react";
-import { loginCall } from "../../apiCalls";
+import { LoginCall } from "../../apiCalls";
 import { AuthContext } from "../../components/context/AuthContexts";
+import {useNavigate} from 'react-router-dom'
 export default function Login() {
   const email = useRef();
   const password = useRef();
+   const navigate = useNavigate();
   const { user,isFetching, error, dispatch } = useContext(AuthContext);
   const submit = (e) => {
     e.preventDefault();
-  
-    loginCall({ email:email.current.value, password:password.current.value }, dispatch);
+ 
+    LoginCall({ email:email.current.value, password:password.current.value }, dispatch);
+   navigate('/',{ state: { key: user} })
   };
-  console.log(user)
+  //console.log(user)
   return (
     <form className="login" onSubmit={submit}>
       <div className="loginWrapper">
