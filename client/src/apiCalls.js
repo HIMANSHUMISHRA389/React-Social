@@ -30,7 +30,7 @@ export const LoginCall = async (userCredentials, dispatch) => {
 
     dispatch({
       type: "LOGIN_SUCCESS",
-      payload: res.data,
+      payload: res1,
     });
   
   } catch (error) {
