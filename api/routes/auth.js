@@ -6,13 +6,14 @@ router.post("/register", async (req, res) => {
     //generate new password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
+console.log(req.body);
     //create new user
     const newUser = await new User({
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
     });
+    console.log(newUser)
     const user = await newUser.save();
     console.log(user);
     res.status(200).json(user);
@@ -27,6 +28,9 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({
       email: req.body.email,
     });
+    console.log("email",req.body.email)
+    console.log("user",user)
+
     if (!user) {
       return res.status(404).json("user not found");
     }
@@ -35,8 +39,10 @@ router.post("/login", async (req, res) => {
       req.body.password,
       user.password
     );
-
-    if(!validPassword ){return res.status(404).json("wrong found");}
+console.log(validPassword)
+    if(!validPassword ){
+      return res.status(404).json("wrong found");
+    }
 
     res.status(200).json(user);
   } catch (error) {

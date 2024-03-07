@@ -49,7 +49,7 @@ return (
             <Link to={`profile/${users.username}`}>
               <img
                 className="postProfileImg"
-                src={users.profilePicture || PF + "person/1.jpeg"}
+                src={users.profilePicture || PF + "person/nodp.png"}
                 alt=""
               />
             </Link>

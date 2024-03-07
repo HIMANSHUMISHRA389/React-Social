@@ -4,14 +4,17 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import {useState,useEffect }from "react"
+import { AuthContext } from '../../components/context/AuthContexts';
+import { useContext } from "react";
 export default function Profile() {
-  
+    const { user } = useContext(AuthContext);
+    console.log(user)
     const BASEURL = "http://localhost:8800/api/";
      const [users, setUsers] = useState([]);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const fetchUsers = async () => {
     try {
-      const res = await fetch(BASEURL + `users?username=Hi`, {
+      const res = await fetch(BASEURL + `users?username=${user.username}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
