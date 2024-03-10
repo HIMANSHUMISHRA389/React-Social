@@ -2,15 +2,16 @@ const router = require("express").Router();
 const Post = require("../models/Post.model");
 const User = require("../models/User.model");
 //create a post
-router.post("/", async (req, res) => {
-  try {
-    const savedPost = await new Post(req.body);
-    await savedPost.save();
-    res.status(200).json(savedPost);
-  } catch (error) {
-    res.status(404).json(error);
-  }
-});
+// router.post("/", async (req, res) => {
+//   console.log("body",req.body)
+//   try {
+//     const savedPost = await new Post(req.body);
+//     await savedPost.save();
+//     res.status(200).json(savedPost);
+//   } catch (error) {
+//     res.status(404).json(error);
+//   }
+// });
 //update a post
 router.put("/:id", async (req, res) => {
   try {
