@@ -29,7 +29,7 @@ const fetchUsers = async () => {
       }
     );
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     setUsers(data);
   } catch (error) {
     console.log(error);
@@ -39,8 +39,7 @@ const fetchUsers = async () => {
 useEffect(() => {
   fetchUsers();
 }, [post.userId]);
-console.log(post)
-console.log(users)  
+ 
 return (
     <div className="post">
       <div className="postWrapper">

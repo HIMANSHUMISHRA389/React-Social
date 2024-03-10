@@ -26,7 +26,7 @@ export const LoginCall = async (userCredentials, dispatch) => {
       }),
     });
     const res1 = await res.json();
-    console.log(res1);
+    
 
     dispatch({
       type: "LOGIN_SUCCESS",
