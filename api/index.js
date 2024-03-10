@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const userRouter = require("./routes/users");
+const Post=require("./models/Post.model")
 const authRoute = require("./routes/auth");
 const postRouter = require("./routes/post");
 const path = require("path");
@@ -18,7 +19,13 @@ const uri = process.env.MONGO_URL;
 //middlewares
 
 
-app.use(cors())
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true, // This allows cookies to be sent across origins
+  })
+);
+
 app.use(
   "/uploads/assets",
   express.static(path.join(__dirname, "/uploads/assets"))
@@ -40,23 +47,41 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+    cb(null, file.originalname);
   },
 });
+
+
+
+
 const upload = multer({ storage: storage });
 
-app.post("/upload", upload.single("file"), (req, res) => {
-  const formData = req.body;
+app.post("/upload", upload.single("file"), async (req, res) => {
+  const desc = req.body.text;
   const file = req.file;
+  const userId = req.body.userId;
 
-  console.log("Form data:", formData);
+  console.log("Form data:", desc);
   console.log("Uploaded file:", file);
+  console.log("userId", userId);
+console.log(file.path)
+  try {
+    const newPost =await new Post({
+      userId: userId,
+      img: file.path, 
+      desc: desc,
+    });
 
-  res.send("File uploaded successfully");
+    const savedPost = await newPost.save();
+    res.status(200).json(savedPost); 
+    console.log("saved",savedPost)
+    // Send the saved post as response
+  } catch (error) {
+    console.error("Error saving post:", error);
+    res.status(500).json({ error: "Failed to save post" });
+  }
 });
+
 
 //APIs
 app.use("/api/users", userRouter);
