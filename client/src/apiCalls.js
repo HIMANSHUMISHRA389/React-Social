@@ -1,11 +1,10 @@
-
-const BASEURL = "http://localhost:8800/api/";
+const BASEURL = "https://react-social-7e9a.onrender.com/api/";
 
 export const LoginCall = async (userCredentials, dispatch) => {
   dispatch({
     type: "LOGIN_START",
   });
-  
+
   //auth/login
 
   try {
@@ -26,13 +25,13 @@ export const LoginCall = async (userCredentials, dispatch) => {
       }),
     });
     const res1 = await res.json();
-    
-
+    console.log(res1?.user?._id)
+    localStorage.setItem("token", res1.token);
+    localStorage.setItem("userId",res1?.user?._id)
     dispatch({
       type: "LOGIN_SUCCESS",
       payload: res1,
     });
-  
   } catch (error) {
     dispatch({
       type: "LOGIN_FAILED",

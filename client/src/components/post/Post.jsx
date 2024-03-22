@@ -6,10 +6,11 @@ import  {format} from "timeago.js"
 import {Link} from "react-router-dom"
 export default function Post({ post }) {
     const [users, setUsers] = useState([]);
-  const BASEURL = "http://localhost:8800/api/";
+  const BASEURL = "https://react-social-7e9a.onrender.com/api/";
   const [like,setLike] = useState(post.likes.length)
   const [isLiked,setIsLiked] = useState(false)
 const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
 //console.log(PF)
   const likeHandler =()=>{
     setLike(isLiked ? like-1 : like+1)
@@ -39,7 +40,8 @@ const fetchUsers = async () => {
 useEffect(() => {
   fetchUsers();
 }, [post.userId]);
- 
+ console.log(post)
+
 return (
     <div className="post">
       <div className="postWrapper">
@@ -48,7 +50,7 @@ return (
             <Link to={`profile/${users.username}`}>
               <img
                 className="postProfileImg"
-                src={users.profilePicture || PF + "person/nodp.png"}
+                src={users.profilePicture || PF + "uploads/assets/person/nodp.png"}
                 alt=""
               />
             </Link>
@@ -62,19 +64,19 @@ return (
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF + post?.img} alt="" />
+          <img className="postImg" src={PF + post?.img} alt="post image" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
               className="likeIcon"
-              src={`${PF}like.png`}
+              src={`${PF}uploads/assets/like.png`}
               onClick={likeHandler}
               alt=""
             />
             <img
               className="likeIcon"
-              src={`${PF}heart.png`}
+              src={`${PF}uploads/assets/heart.png`}
               onClick={likeHandler}
               alt=""
             />

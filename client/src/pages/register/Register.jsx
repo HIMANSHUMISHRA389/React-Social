@@ -1,6 +1,5 @@
 import "./register.css";
-import { useEffect, useRef, useState } from "react";
-import { Navigate } from "react-router-dom";
+import {  useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const BASEURL = "http://localhost:8800/api/";
 export default function Register() {

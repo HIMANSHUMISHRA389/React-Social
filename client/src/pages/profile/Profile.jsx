@@ -41,12 +41,12 @@ console.log(users)
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={users.coverPicture || PF + "person/noCover.png"}
+                src={users.coverPicture || PF + "uploads/assets/person/noCover.png"}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src={users.profilePicture || PF + "person/nodp.png"}
+                src={users.profilePicture || PF + "uploads/assets/person/nodp.png"}
                 alt=""
               />
             </div>
@@ -56,7 +56,7 @@ console.log(users)
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username="Hi" />
+            <Feed username={user.username} />
             <Rightbar user={users} />
           </div>
         </div>

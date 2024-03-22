@@ -8,7 +8,11 @@ export default function Login() {
   const password = useRef();
  
    
-  const { user,isFetching, error, dispatch } = useContext(AuthContext);
+  const { 
+    // user,
+    // isFetching, 
+    // error,
+     dispatch } = useContext(AuthContext);
   const submit = (e) => {
     e.preventDefault();
 

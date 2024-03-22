@@ -3,12 +3,14 @@ import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContexts";
-const BASEURL = "http://localhost:8800/api/";
+
 export default function Topbar() {
   const { user } = useContext(AuthContext);
   // console.log(user)
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+const chat=()=>{
+  console.log("chat")
+}
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -35,10 +37,13 @@ export default function Topbar() {
             <Person />
             <span className="topbarIconBadge">1</span>
           </div>
-          <div className="topbarIconItem">
-            <Chat />
-            <span className="topbarIconBadge">2</span>
-          </div>
+          <Link to="/chat" style={{color:"white"}}>
+            <div className="topbarIconItem" onClick={() => chat()}>
+              <Chat />
+              <span className="topbarIconBadge">2</span>
+            </div>
+          </Link>
+
           <div className="topbarIconItem">
             <Notifications />
             <span className="topbarIconBadge">1</span>
@@ -49,7 +54,7 @@ export default function Topbar() {
             src={
               user.profilePicture
                 ? PF + user.profilePicture
-                : PF + "person/nodp.png"
+                : PF + "uploads/assets/person/nodp.png"
             }
             alt=""
             className="topbarImg"

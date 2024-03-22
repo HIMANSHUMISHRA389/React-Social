@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContexts";
+
 import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
 
-
 export default function Feed({ username }) {
-  const BASEURL = "http://localhost:8800/api/";
+  const BASEURL = "https://react-social-7e9a.onrender.com/api/";
   const [posts, setPosts] = useState([]);
-
+  const { user} = useContext(AuthContext);
+const userId = localStorage.getItem("userId");
+console.log(userId)
+//  console.log(user?.user?.token);
   const fetchPosts = async () => {
-    console.log(username)
     try {
       const res = username
         ? await fetch(BASEURL + "posts/profile/" + username, {
@@ -18,20 +21,23 @@ export default function Feed({ username }) {
               "Content-Type": "application/json",
             },
           })
-        : await fetch(BASEURL + "posts/timeline/65e1a66ce72c102c2d64ad49", {
+        : await fetch(BASEURL + `posts/timeline/${userId}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
           });
       const data = await res.json();
-      console.log(data);
-      setPosts(data);
+      //log(data);
+      if (data.length > 0) {
+        setPosts(data);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-  //console.log(posts);
+ 
+  
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -39,8 +45,8 @@ export default function Feed({ username }) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
-        {posts.map((p) => (
+        <Share fetchPosts={fetchPosts}/>
+        {posts?.map((p) => (
           <Post key={p._id} post={p} />
         ))}
       </div>

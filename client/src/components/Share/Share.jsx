@@ -1,37 +1,43 @@
 import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
 import { AuthContext } from "../context/AuthContexts";
-import { Navigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
 
-export default function Share() {
+import { useContext,  useRef, useState } from "react";
+export default function Share({fetchPosts}) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState();
-  const BASEURL = "http://localhost:8800";
-  const ab = {
-    img: file,
-  };
+  const BASEURL = "https://react-social-7e9a.onrender.com/";
+
   const formData = new FormData();
-  formData.append("file", file);
+  let mind = useRef();
+ console.log(user)
   const upload = async () => {
     try {
+       formData.append("file", file);
+       formData.append("text", mind.current.value);
+       formData.append("userId",user._id)
+      //  formData.append("userId",user._id)
+      console.log(mind.current.value)
        let res = await fetch(BASEURL + "/upload", {
          method: "POST",
          body:formData
        });
-      //  res = await res.json();
-       console.log(res);
+       setFile(null)
+       mind.current.value=""
+       fetchPosts()
+       
     } catch (error) {
       console.log(error)
     }
    
   };
 
-  useEffect(() => {
-    console.log(file);
-    upload();
-  }, [file]);
+
+
+
+
+
 
   return (
     <div className="share">
@@ -39,12 +45,13 @@ export default function Share() {
         <div className="shareTop">
           <img
             className="shareProfileImg"
-            src={user?.profilePicture || PF + "person/nodp.png"}
+            src={user?.profilePicture || PF + "uploads/assets/person/nodp.png"}
             alt=""
           />
           <input
             placeholder={"what's in your mind " + user.username}
             className="shareInput"
+            ref={mind}
           />
         </div>
         <hr className="shareHr" />
@@ -76,7 +83,7 @@ export default function Share() {
               <span className="shareOptionText">Feelings</span>
             </div>
           </div>
-          <button className="shareButton">Share</button>
+          <button className="shareButton" onClick={upload}>Share</button>
         </div>
       </div>
     </div>
