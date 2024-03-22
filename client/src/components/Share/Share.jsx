@@ -26,7 +26,7 @@ export default function Share({fetchPosts}) {
        setFile(null)
        mind.current.value=""
        fetchPosts()
-       
+       console.log(res)
     } catch (error) {
       console.log(error)
     }
