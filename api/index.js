@@ -21,7 +21,7 @@ const uri = process.env.MONGO_URL;
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://client-lfivn9clc-himanshumishra389s-projects.vercel.app/",
     credentials: true, // This allows cookies to be sent across origins
   })
 );
