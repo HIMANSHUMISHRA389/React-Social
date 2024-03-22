@@ -78,6 +78,9 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 });
 
 //APIs
+app.use("/",(req,res)=>{
+  res.send("welocme")
+})
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRouter);
