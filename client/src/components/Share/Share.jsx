@@ -7,7 +7,7 @@ export default function Share({fetchPosts}) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState();
-  const BASEURL = "https://react-social-7e9a.onrender.com/";
+  const BASEURL = "https://react-social-7e9a.onrender.com";
 
   const formData = new FormData();
   let mind = useRef();
