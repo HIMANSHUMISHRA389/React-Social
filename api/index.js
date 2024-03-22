@@ -6,10 +6,11 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const userRouter = require("./routes/users");
-const Post=require("./models/Post.model")
+const Post = require("./models/Post.model");
 const authRoute = require("./routes/auth");
 const postRouter = require("./routes/post");
 const path = require("path");
+const jwt = require("jsonwebtoken");
 
 dotenv.config();
 const multer = require("multer");
@@ -18,7 +19,6 @@ const uri = process.env.MONGO_URL;
 
 //middlewares
 
-
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -26,20 +26,20 @@ app.use(
   })
 );
 
+// Serve static files from the uploads directory
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 app.use(
   "/uploads/assets",
   express.static(path.join(__dirname, "/uploads/assets"))
 );
 
-
 app.use(express.json());
 app.use(helmet());
-app.use(morgan("common"));
+// app.use(morgan("common"));
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
 
 //using multer to upload images
 const storage = multer.diskStorage({
@@ -51,37 +51,31 @@ const storage = multer.diskStorage({
   },
 });
 
-
-
-
 const upload = multer({ storage: storage });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
+  const pa = req.file.path;
   const desc = req.body.text;
-  const file = req.file;
-  const userId = req.body.userId;
+  let file = req.file.path;
+  // Replace "\" with "/
+  let fixedPath = file.replace(/\\/g, "/");
 
-  console.log("Form data:", desc);
-  console.log("Uploaded file:", file);
-  console.log("userId", userId);
-console.log(file.path)
+  const userId = req.body.userId;
   try {
-    const newPost =await new Post({
+    const newPost = await new Post({
       userId: userId,
-      img: file.path, 
+      img: fixedPath,
       desc: desc,
     });
 
     const savedPost = await newPost.save();
-    res.status(200).json(savedPost); 
-    console.log("saved",savedPost)
+    res.status(200).json(savedPost);
     // Send the saved post as response
   } catch (error) {
     console.error("Error saving post:", error);
     res.status(500).json({ error: "Failed to save post" });
   }
 });
-
 
 //APIs
 app.use("/api/users", userRouter);
