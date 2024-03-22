@@ -1,7 +1,7 @@
 import "./register.css";
 import {  useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const BASEURL = "http://localhost:8800/api/";
+const BASEURL = "https://react-social-7e9a.onrender.com/api/";
 export default function Register() {
   const navigate=useNavigate()
   const username = useRef();
