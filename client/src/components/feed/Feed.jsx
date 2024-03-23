@@ -28,7 +28,7 @@ console.log(userId)
             },
           });
       const data = await res.json();
-      //log(data);
+      console.log(data);
       if (data.length > 0) {
         setPosts(data);
       }

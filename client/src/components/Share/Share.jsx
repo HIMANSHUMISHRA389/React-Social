@@ -23,10 +23,12 @@ export default function Share({fetchPosts}) {
          method: "POST",
          body:formData
        });
+       const resu = await res.json();
+       console.log(resu);
        setFile(null)
        mind.current.value=""
        fetchPosts()
-       console.log(res)
+       
     } catch (error) {
       console.log(error)
     }
