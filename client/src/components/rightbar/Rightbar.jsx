@@ -1,6 +1,6 @@
 import "./rightbar.css";
 import { Users } from "../../dummyData";
-import Online from "../online/Online";
+import Online from "../online/online.jsx";
 
  function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;

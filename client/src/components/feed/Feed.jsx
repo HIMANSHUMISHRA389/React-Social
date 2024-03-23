@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContexts";
 
 import Post from "../post/Post";
-import Share from "../share/Share";
+import Share from "../Share/Share.jsx";
 import "./feed.css";
 
 export default function Feed({ username }) {
@@ -13,6 +13,7 @@ const userId = localStorage.getItem("userId");
 console.log(userId)
 //  console.log(user?.user?.token);
   const fetchPosts = async () => {
+    console.log(user.user._id)
     try {
       const res = username
         ? await fetch(BASEURL + "posts/profile/" + username, {
@@ -21,7 +22,7 @@ console.log(userId)
               "Content-Type": "application/json",
             },
           })
-        : await fetch(BASEURL + `posts/timeline/${userId}`, {
+        : await fetch(BASEURL + `posts/timeline/${user.user._id}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

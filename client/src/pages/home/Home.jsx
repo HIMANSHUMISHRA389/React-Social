@@ -1,4 +1,4 @@
-import Topbar from "../../components/topbar/Topbar";
+import Topbar from "../../components/topbar/TopBar.jsx";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
