@@ -45,7 +45,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8800",
+  "proxy": "https://react-social-7e9a.onrender.com",
   "devDependencies": {
     "react-scripts": "^5.0.1"
   }
