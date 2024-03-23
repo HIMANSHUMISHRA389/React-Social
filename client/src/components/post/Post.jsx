@@ -40,7 +40,7 @@ const fetchUsers = async () => {
 useEffect(() => {
   fetchUsers();
 }, [post.userId]);
- console.log(post)
+//  console.log(post)
 
 return (
     <div className="post">
