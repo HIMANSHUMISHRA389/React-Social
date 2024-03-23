@@ -1,4 +1,5 @@
 {
+  "homepage": "https://HIMANSHUMISHRA389.github.io/React-Social",
   "name": "react-social",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +19,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -45,6 +48,7 @@
   },
   "proxy": "https://react-social-7e9a.onrender.com",
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "react-scripts": "^5.0.1"
   }
 }
