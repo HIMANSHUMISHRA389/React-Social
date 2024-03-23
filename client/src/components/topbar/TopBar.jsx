@@ -15,7 +15,7 @@ const chat=()=>{
     <div className="topbarContainer">
       <div className="topbarLeft">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Lamasocial</span>
+          <span className="logo">Facebook</span>
         </Link>
       </div>
       <div className="topbarCenter">
