@@ -20,9 +20,11 @@ const ConvoTop = () => {
           borderRadius="50%"
           margin="0 5% 0 3%"
         />
-        <Box>
-          <p>Dany Daniel</p>
-          <p>Online</p>
+        <Box 
+        display="flex" flexDirection="column" justifyContent="center" alignItems="center"
+        >
+          <span>Himanshu</span>
+          <span style={{margin:"12% 20% 0 0",fontStyle:"smaller"}}>Online</span>
         </Box>
       </Flex>
       <Flex bg="white" flex="4"></Flex>
@@ -34,7 +36,7 @@ const ConvoTop = () => {
       >
         <Box
           width="25%"
-          height="35%"
+          height="50%"
           rounded="25px"
           textAlign="center"
           alignContent="center"
@@ -45,7 +47,7 @@ const ConvoTop = () => {
         </Box>
         <Box
           width="25%"
-          height="35%"
+          height="50%"
           rounded="25px"
           textAlign="center"
           alignContent="center"
@@ -59,7 +61,7 @@ const ConvoTop = () => {
         <Box
           display="flex"
           width="25%"
-          height="35%"
+          height="50%"
           textAlign="center"
           alignContent="center"
           alignItems="center"
