@@ -1,18 +1,22 @@
 {
-  
   "name": "react-social",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
-    "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "eslint": "^8.57.0",
+    "framer-motion": "^11.0.20",
+    "lts": "^1.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
     "timeago.js": "^4.0.2",
     "web-vitals": "^1.0.1"
@@ -30,8 +34,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -48,7 +51,10 @@
   },
   "proxy": "https://react-social-7e9a.onrender.com",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "customize-cra": "^1.0.0",
     "gh-pages": "^6.1.1",
+    "react-app-rewired": "^2.2.1",
     "react-scripts": "^5.0.1"
   }
 }

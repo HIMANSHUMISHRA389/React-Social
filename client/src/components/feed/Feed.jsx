@@ -8,12 +8,15 @@ import "./feed.css";
 export default function Feed({ username }) {
   const BASEURL = "https://react-social-7e9a.onrender.com/api/";
   const [posts, setPosts] = useState([]);
-  const { user} = useContext(AuthContext);
-const userId = localStorage.getItem("userId");
-console.log(userId)
-//  console.log(user?.user?.token);
+  const { user } = useContext(AuthContext);
+  const userId = localStorage.getItem("userId");
+  console.log(userId);
+
+  
+  //  console.log(user?.user?.token);
   const fetchPosts = async () => {
-    console.log(user.user._id)
+    
+    console.log(user.user._id);
     try {
       const res = username
         ? await fetch(BASEURL + "posts/profile/" + username, {
@@ -37,8 +40,7 @@ console.log(userId)
       console.log(error);
     }
   };
- 
-  
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -46,7 +48,7 @@ console.log(userId)
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share fetchPosts={fetchPosts}/>
+        <Share fetchPosts={fetchPosts} />
         {posts?.map((p) => (
           <Post key={p._id} post={p} />
         ))}
