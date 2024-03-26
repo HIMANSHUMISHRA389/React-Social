@@ -13,7 +13,7 @@ import { PiSmiley } from "react-icons/pi";
 import { TbSend } from "react-icons/tb";
 import { MdPermMedia } from "react-icons/md";
 
-const ConvoBottom = () => {
+const ConvoBottom = ({ handleMessageSubmit }) => {
   return (
     <Container
       position="fixed"
@@ -25,9 +25,7 @@ const ConvoBottom = () => {
       bg="#F6F6F6"
       alignItems="center"
     >
-      <Box 
-      width="50vw"
-       bg="white" rounded="20px">
+      <Box width="50vw" bg="white" rounded="20px">
         <InputGroup
           size="sm"
           height="100%"
@@ -40,17 +38,20 @@ const ConvoBottom = () => {
           <InputLeftAddon>
             <MdPermMedia />
           </InputLeftAddon>
-          <Input
-            placeholder="Write messages..."
-            height="88%"
-            width="85%"
-            style={{
-              outline: "none",
-              borderRadius: "30px",
-              margin: "3px",
-              border: "none",
-            }}
-          />
+          <form onSubmit={handleMessageSubmit}>
+            <Input
+              onClick={handleMessageSubmit}
+              placeholder="Write messages..."
+              height="88%"
+              width="85%"
+              style={{
+                outline: "none",
+                borderRadius: "30px",
+                margin: "3px",
+                border: "none",
+              }}
+            />
+          </form>
           <InputRightAddon>
             <PiSmiley />
           </InputRightAddon>

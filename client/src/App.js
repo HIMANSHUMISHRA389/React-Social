@@ -7,6 +7,7 @@ import Chat from "./pages/chats/MainChat";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./components/context/AuthContexts";
 import { Navigate } from "react-router-dom";
+
 function App() {
   // const navigate=useNavigate()
   const { user } = useContext(AuthContext);
