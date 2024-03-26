@@ -51,7 +51,7 @@ io.on('connection', socket => {
 //middlewares
 app.use(
   cors({
-    origin: "https://react-social-theta.vercel.app/",
+    origin: "https://react-social-theta.vercel.app",
   })
 );
 
