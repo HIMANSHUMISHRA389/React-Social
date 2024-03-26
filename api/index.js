@@ -21,37 +21,39 @@ const uri = process.env.MONGO_URL;
 // Create HTTP server
 const server = http.createServer(app);
 
-// Initialize Socket.IO
-const io = socketIo(server);
 
+//Cors setup
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 
 // Socket.IO logic
-io.on('connection', socket => {
-  console.log('A user connected');
+io.on("connection", (socket) => {
+  console.log("A user connected");
 
   // Listen for new messages
-  socket.on('message', async data => {
-    console.log('New message:', data);
+  socket.on("message", async (data) => {
+    console.log("New message:", data);
 
     // Save the message to MongoDB
     const message = new Message(data);
     await message.save();
 
     // Broadcast the new message to all connected clients
-    io.emit('message', data);
+    io.emit("message", data);
   });
 
   // Disconnect event
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
   });
 });
 
-
 //middlewares
-app.use(
-  cors()
-);
+app.use(cors());
 
 // Serve static files from the uploads directory
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -103,14 +105,6 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     res.status(500).json({ error: "Failed to save post" });
   }
 });
-
-
-
-
-
-
-
-
 
 //APIs
 
