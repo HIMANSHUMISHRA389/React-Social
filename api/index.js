@@ -50,9 +50,7 @@ io.on('connection', socket => {
 
 //middlewares
 app.use(
-  cors({
-    origin: "https://react-social-theta.vercel.app",
-  })
+  cors()
 );
 
 // Serve static files from the uploads directory
