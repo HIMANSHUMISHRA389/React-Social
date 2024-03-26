@@ -11,14 +11,44 @@ const authRoute = require("./routes/auth");
 const postRouter = require("./routes/post");
 const path = require("path");
 const jwt = require("jsonwebtoken");
-
+const socketIo = require("socket.io");
+const http = require("http");
 dotenv.config();
 const multer = require("multer");
 const cors = require("cors");
 const uri = process.env.MONGO_URL;
 
-//middlewares
+// Create HTTP server
+const server = http.createServer(app);
 
+// Initialize Socket.IO
+const io = socketIo(server);
+
+
+// Socket.IO logic
+io.on('connection', socket => {
+  console.log('A user connected');
+
+  // Listen for new messages
+  socket.on('message', async data => {
+    console.log('New message:', data);
+
+    // Save the message to MongoDB
+    const message = new Message(data);
+    await message.save();
+
+    // Broadcast the new message to all connected clients
+    io.emit('message', data);
+  });
+
+  // Disconnect event
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
+
+
+//middlewares
 app.use(
   cors()
 );
@@ -74,6 +104,14 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
+
 //APIs
 
 app.use("/api/users", userRouter);
@@ -85,6 +123,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.error("Error connecting to MongoDB Atlas:", err));
 
-app.listen(8800, () => {
+server.listen(8800, () => {
   console.log("Server started at loacalhost:8800");
 });
