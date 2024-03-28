@@ -3,15 +3,15 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 //get a user
 router.get("/:userId", async (req, res) => {
-  const userId = req.query.userId;
+  const userId = req.params.userId;
   const username = req.query.username;
-  console.log("here");
+  console.log("here",userId);
   try {
     const user = userId
       ? await User.findById(userId)
       : await User.findOne({ username: username });
     const { password, updatedAt, ...others } = user._doc;
-    res.status(200).json(user);
+    res.status(200).json(others);
   } catch (error) {
     res.status(404).json(error);
   }
