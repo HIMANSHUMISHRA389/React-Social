@@ -1,10 +1,23 @@
 const User = require("../models/User.model");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-
+//get a user
+router.get("/:userId", async (req, res) => {
+  const userId = req.query.userId;
+  const username = req.query.username;
+  console.log("here");
+  try {
+    const user = userId
+      ? await User.findById(userId)
+      : await User.findOne({ username: username });
+    const { password, updatedAt, ...others } = user._doc;
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json(error);
+  }
+});
 //update user
 router.put("/:id", async (req, res) => {
-  
   if (req.body.userId == req.params.id || req.user.isAdmin) {
     if (req.body.password) {
       try {
@@ -47,36 +60,18 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//get a user
-router.get("/", async (req, res) => {
-  const userId=req.query.userId;
-  const username=req.query.username;
-  try {
-    const user = userId
-      ? await User.findById(userId)
-      : await User.findOne({username:username});
-    ;
-    const { password, updatedAt, ...others } = user._doc;
-    res.status(200).json(others);
-  } catch (error) {
-    res.status(404).json(error);
-  }
-});
-
 //follow user
 router.put("/:id/follow", async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
-       
       const user = await User.findById(req.params.id);
       const currentUser = await User.findById(req.body.userId);
       if (!user.followers.includes(req.body.userId)) {
-      
         await user.updateOne({ $push: { followers: req.body.userId } });
         await currentUser.updateOne({ $push: { followings: req.params.id } });
-         res.status(403).json("user has been followed");
+        res.status(403).json("user has been followed");
       } else {
-        res.status(403).json("error")
+        res.status(403).json("error");
       }
     } catch (error) {
       res.status(500).json(error);

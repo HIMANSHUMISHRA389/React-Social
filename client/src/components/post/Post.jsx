@@ -1,50 +1,52 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 
-import { useState,useEffect } from "react";
-import  {format} from "timeago.js"
-import {Link} from "react-router-dom"
+import { useState, useEffect } from "react";
+import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 export default function Post({ post }) {
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const BASEURL = "https://react-social-7e9a.onrender.com/api/";
-  const [like,setLike] = useState(post.likes.length)
-  const [isLiked,setIsLiked] = useState(false)
-const PF = process.env.REACT_APP_PUBLIC_FOLDER
-const userId=localStorage.getItem("userId")
-//console.log(PF)
-  const likeHandler =()=>{
-    setLike(isLiked ? like-1 : like+1)
-    setIsLiked(!isLiked)
-  }
-console.log(post)
-// const fetchUsers = async () => {
+  const [like, setLike] = useState(post.likes.length);
+  const [isLiked, setIsLiked] = useState(false);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const userId = localStorage.getItem("userId");
+  //console.log(PF)
+  const likeHandler = () => {
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
+  console.log(post);
+  // const fetchUsers = async () => {
 
- const fetchUsers=async()=>{
-   try {
-   console.log(userId)
-     
+  const fetchUsers = async () => {
+    try {
+      console.log(userId);
 
-    const res =  await fetch(BASEURL + 'users/'+post.userId, {
+      if (post.userId != undefined) {
+        const res = await fetch(BASEURL + "users/" + post.userId, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-        })
-    const data = await res.json();
-    console.log(data);
-    setUsers(data);
-  } catch (error) {
-    console.log(error);
-  }
- 
-};
+        });
+        const data = await res.json();
+        console.log(data);
+        setUsers(data);
+      } else {
+        console.log(post.userId);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-useEffect(() => {
-fetchUsers()
-}, [post.userId]);
-//  console.log(post)
+  useEffect(() => {
+    fetchUsers();
+  }, [post.userId]);
+  //  console.log(post)
 
-return (
+  return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
@@ -52,7 +54,9 @@ return (
             <Link to={`profile/${users.username}`}>
               <img
                 className="postProfileImg"
-                src={users.profilePicture || PF + "uploads/assets/person/nodp.png"}
+                src={
+                  users.profilePicture || PF + "uploads/assets/person/nodp.png"
+                }
                 alt=""
               />
             </Link>
