@@ -8,15 +8,15 @@ export default function Share({fetchPosts}) {
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState();
   const BASEURL = "https://react-social-7e9a.onrender.com";
-
+const userId=localStorage.getItem("userId")
   const formData = new FormData();
   let mind = useRef();
- console.log(user)
+ console.log(userId)
   const upload = async () => {
     try {
        formData.append("file", file);
        formData.append("text", mind.current.value);
-       formData.append("userId",user._id)
+       formData.append("userId",userId)
       //  formData.append("userId",user._id)
       console.log(mind.current.value)
        let res = await fetch(BASEURL + "/upload", {
