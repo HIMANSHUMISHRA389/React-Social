@@ -12,8 +12,22 @@ const MainChat = () => {
 
 
 const {user}=useContext(AuthContext)
+const userId = localStorage.getItem("userId")||user._id
+console.log(userId)
+ const getConversation = async () => {
+   try {
+     const res = await fetch("/conversations/" + userId);
+     const res1 = await res.json();
+     console.log(res1);
+   } catch (error) {
+     console.log(error);
+   }
+ };
 
-console.log(user)
+useEffect(()=>{
+ getConversation()
+},[userId])
+
 
 
 
