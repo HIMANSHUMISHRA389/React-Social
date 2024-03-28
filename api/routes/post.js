@@ -6,20 +6,20 @@ const Post = require("../models/Post.model");
 
 //create a post
 
-// router.post("/", async (req, res) => {
-//   try {
-//     const user = User.findById(req.body.userId);
-//     if (user) {
-//       const pos=await new Post(req.body)
-//       await pos.save()
-//       res.status(200).json("your post has been created");
-//     } else {
-//       res.status(403).json("you can update only your post");
-//     }
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// });
+router.get("/feed", async (req, res) => {
+  try {
+    const user = User.findById(req.body.userId);
+    if (user) {
+      const pos=await Post.find()
+    
+      res.status(200).json(pos);
+    } else {
+      res.status(403).json("you can update only your post");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 
 
