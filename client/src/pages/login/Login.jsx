@@ -22,6 +22,9 @@ export default function Login() {
 
   
   };
+  const register=()=>{
+     window.location.href = "/register";
+  }
   //console.log(user)
   return (
     <form className="login" onSubmit={submit}>
@@ -52,7 +55,7 @@ export default function Login() {
             />
             <button className="loginButton">Log In</button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
+            <button className="loginRegisterButton" onClick={register}>
               Create a New Account
             </button>
           </div>

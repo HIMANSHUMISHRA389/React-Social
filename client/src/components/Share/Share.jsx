@@ -51,7 +51,7 @@ export default function Share({fetchPosts}) {
             alt=""
           />
           <input
-            placeholder={"what's in your mind " + user.username}
+            placeholder={"what's in your mind " + user?.username}
             className="shareInput"
             ref={mind}
           />

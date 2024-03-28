@@ -6,10 +6,14 @@ import { AuthContext } from "../context/AuthContexts";
 
 export default function Topbar() {
   const { user } = useContext(AuthContext);
-  // console.log(user)
+   console.log(user)
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 const chat=()=>{
   console.log("chat")
+}
+const logout=()=>{
+  localStorage.removeItem("token")
+   window.location.href = "/login";
 }
   return (
     <div className="topbarContainer">
@@ -37,7 +41,7 @@ const chat=()=>{
             <Person />
             <span className="topbarIconBadge">1</span>
           </div>
-          <Link to="/chat" style={{color:"white"}}>
+          <Link to="/chat" style={{ color: "white" }}>
             <div className="topbarIconItem" onClick={() => chat()}>
               <Chat />
               <span className="topbarIconBadge">2</span>
@@ -48,12 +52,16 @@ const chat=()=>{
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>
+          <div className="topbarIconItem">
+            
+            <span className="" onClick={logout}>Logout</span>
+          </div>
         </div>
-        <Link to={`profile/${user.username}`}>
+        <Link to={`profile/${user?.username}`}>
           <img
             src={
-              user.profilePicture
-                ? PF + user.profilePicture
+              user?.profilePicture
+                ? PF + user?.profilePicture
                 : PF + "uploads/assets/person/nodp.png"
             }
             alt=""

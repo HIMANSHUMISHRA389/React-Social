@@ -15,17 +15,17 @@ export default function Feed({ username }) {
   
   //  console.log(user?.user?.token);
   const fetchPosts = async () => {
-    
-    console.log(user.user._id);
+    console.log("username",username)
+    console.log(user?.user?._id);
     try {
-      const res = username
+      const res = username!=undefined
         ? await fetch(BASEURL + "posts/profile/" + username, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
           })
-        : await fetch(BASEURL + `posts/timeline/${user.user._id}`, {
+        : await fetch(BASEURL + `posts/timeline/${userId}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

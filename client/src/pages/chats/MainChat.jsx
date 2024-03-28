@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import { Container } from "@chakra-ui/react";
 import Contact from "./components/Contact";
 import Conversation from "./components/Conversation";
 import io from "socket.io-client";
+import {AuthContext} from "../../components/context/AuthContexts"
 
-const socket = io("https://react-social-7e9a.onrender.com");
+
 const MainChat = () => {
 
-const [messages, setMessages] = useState([]);
-const [input, setInput] = useState("");
 
-useEffect(() => {
-  // Listen for incoming messages
-  socket.on("message", (data) => {
-    setMessages([...messages, data]);
-  });
 
-  // Clean up when component unmounts
-  return () => {
-    socket.disconnect();
-  };
-}, [messages]);
+const {user}=useContext(AuthContext)
 
-const handleMessageSubmit = (e) => {
-  e.preventDefault();
-  if (input.trim() !== "") {
-    socket.emit("message", { text: input });
-    setInput("");
-  }
-};
+console.log(user)
+
+
 
   return (
     <>
@@ -41,7 +27,7 @@ const handleMessageSubmit = (e) => {
           <Contact />
         </Container>
         <Container flex="80vw" bg="#F6F6F6">
-          <Conversation handleMessageSubmit={handleMessageSubmit} />
+          <Conversation  />
         </Container>
       </Container>
     </>

@@ -11,37 +11,36 @@ import { Navigate } from "react-router-dom";
 function App() {
   // const navigate=useNavigate()
   const { user } = useContext(AuthContext);
+  console.log(user)
   const isAuthenticated = !!localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   console.log(userId);
   console.log(isAuthenticated);
+  
+
 
   return (
     <Router>
       <Routes>
-        {/* <Route
+        <Route
           exact
           path="/"
-          element={user?.user?._id ? <Home /> : <Register />}
+          element={isAuthenticated ? <Home /> : <Register />}
         />
         <Route
           exact
           path="/register"
-          element={user?.user?._id ? <Navigate to="/" replace /> : <Register />}
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Register />}
         />
         <Route
           path="/login"
-          element={user?.user?._id ? <Navigate to="/" replace /> : <Login />}
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Login />}
         />
-        <Route exact path="/profile/:username" element={<Profile />} /> */}
+        <Route exact path="/profile/:username" element={<Profile />} />
         <Route
           exact
-          path="/"
-          element={
-            // user?.user?._id ?
-            <Chat />
-            //  : <Register />
-          }
+          path="/chat"
+          element={isAuthenticated ? <Chat /> : <Login />}
         />
       </Routes>
     </Router>

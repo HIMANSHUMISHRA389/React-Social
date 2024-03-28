@@ -7,13 +7,16 @@ import {
   InputLeftAddon,
   InputRightAddon,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineMic } from "react-icons/md";
 import { PiSmiley } from "react-icons/pi";
 import { TbSend } from "react-icons/tb";
 import { MdPermMedia } from "react-icons/md";
 
-const ConvoBottom = ({ handleMessageSubmit }) => {
+
+const ConvoBottom = () => {
+  
+  
   return (
     <Container
       position="fixed"
@@ -38,9 +41,9 @@ const ConvoBottom = ({ handleMessageSubmit }) => {
           <InputLeftAddon>
             <MdPermMedia />
           </InputLeftAddon>
-          <form onSubmit={handleMessageSubmit}>
+          <form >
             <Input
-              onClick={handleMessageSubmit}
+             
               placeholder="Write messages..."
               height="88%"
               width="85%"
@@ -51,6 +54,7 @@ const ConvoBottom = ({ handleMessageSubmit }) => {
                 border: "none",
               }}
             />
+            <button>Send</button>
           </form>
           <InputRightAddon>
             <PiSmiley />

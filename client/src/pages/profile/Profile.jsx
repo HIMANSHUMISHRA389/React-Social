@@ -14,7 +14,7 @@ export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const fetchUsers = async () => {
     try {
-      const res = await fetch(BASEURL + `users?username=${user.username}`, {
+      const res = await fetch(BASEURL + `users?username=${user?.username}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

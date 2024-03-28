@@ -1,14 +1,17 @@
-import React from 'react'
-import ConvoTop from './ConvoTop'
-import ConvoBottom from './ConvoBottom'
+import React, { useEffect, useState } from "react";
+import ConvoTop from "./ConvoTop";
+import ConvoBottom from "./ConvoBottom";
+import io from "socket.io-client";
+import ConvoChat from "./ConvoChat";
 
-const Conversation = ({ handleMessageSubmit }) => {
+const Conversation = () => {
   return (
     <div>
       <ConvoTop />
-      <ConvoBottom handleMessageSubmit={handleMessageSubmit} />
+      <ConvoChat />
+      <ConvoBottom />
     </div>
   );
 };
 
-export default Conversation
+export default Conversation;
