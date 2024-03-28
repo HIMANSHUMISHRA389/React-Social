@@ -51,7 +51,7 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`profile/${users.username}`}>
+            <Link to={`/api/posts/profile/${users.username}`}>
               <img
                 className="postProfileImg"
                 src={
