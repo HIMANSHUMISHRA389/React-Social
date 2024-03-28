@@ -31,7 +31,7 @@ export default function Feed({ username }) {
       //         "Content-Type": "application/json",
       //       },
       //     });
-      const res=userId ? await fetch(BASEURL + `api/posts/feed`, {
+      const res=userId ? await fetch(BASEURL + `posts/feed`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
