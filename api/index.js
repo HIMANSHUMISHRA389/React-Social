@@ -7,8 +7,10 @@ const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const userRouter = require("./routes/users");
 const Post = require("./models/Post.model");
-const authRoute = require("./routes/auth");
+const conversationRouter = require("./routes/conversation");
+const messageRouter = require("./routes/messages");
 const postRouter = require("./routes/post");
+const authRoute = require("./routes/auth");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const socketIo = require("socket.io");
@@ -23,34 +25,7 @@ const server = http.createServer(app);
 
 
 //Cors setup
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
 
-// Socket.IO logic
-io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  // Listen for new messages
-  socket.on("message", async (data) => {
-    console.log("New message:", data);
-
-    // Save the message to MongoDB
-    const message = new Message(data);
-    await message.save();
-
-    // Broadcast the new message to all connected clients
-    io.emit("message", data);
-  });
-
-  // Disconnect event
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
-});
 
 //middlewares
 app.use(cors());
@@ -111,7 +86,8 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRouter);
-
+app.use("/api/conversation", conversationRouter);
+app.use("/api/messages", messageRouter);
 mongoose
   .connect(uri, {})
   .then(() => console.log("Connected to MongoDB Atlas"))
