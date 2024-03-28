@@ -15,7 +15,7 @@ function App() {
   const isAuthenticated = !!localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   console.log(userId);
-  console.log(isAuthenticated);
+  console.log(isAuthenticated)
   
 
 

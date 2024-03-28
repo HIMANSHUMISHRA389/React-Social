@@ -16,7 +16,7 @@ export default function Share({fetchPosts}) {
     try {
        formData.append("file", file);
        formData.append("text", mind.current.value);
-       formData.append("userId",user.user._id)
+       formData.append("userId",user._id)
       //  formData.append("userId",user._id)
       console.log(mind.current.value)
        let res = await fetch(BASEURL + "/upload", {

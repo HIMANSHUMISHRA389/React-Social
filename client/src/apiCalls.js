@@ -8,7 +8,7 @@ export const LoginCall = async (userCredentials, dispatch) => {
   //auth/login
 
   try {
-    console.log(userCredentials);
+    console.log(userCredentials)
     // Define the URL to which you want to send the POST request
     const url = BASEURL + "auth/login";
 
@@ -26,12 +26,18 @@ export const LoginCall = async (userCredentials, dispatch) => {
     });
     const res1 = await res.json();
     console.log(res1?.user?._id)
-    localStorage.setItem("token", res1.token);
-    localStorage.setItem("userId",res1?.user?._id)
-    dispatch({
-      type: "LOGIN_SUCCESS",
-      payload: res1,
-    });
+   
+    if (res1?.user?._id!=undefined) {
+      localStorage.setItem("token", res1.token);
+      localStorage.setItem("userId", res1?.user?._id);
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: res1,
+      });
+       
+    }else{
+      alert("wrong credentials")
+    }
   } catch (error) {
    
     dispatch({

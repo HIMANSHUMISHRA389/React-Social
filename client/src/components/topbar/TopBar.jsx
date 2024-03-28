@@ -12,7 +12,9 @@ const chat=()=>{
   console.log("chat")
 }
 const logout=()=>{
+  localStorage.removeItem("userId");
   localStorage.removeItem("token")
+   
    window.location.href = "/login";
 }
   return (

@@ -10,35 +10,37 @@ export default function Post({ post }) {
   const [like,setLike] = useState(post.likes.length)
   const [isLiked,setIsLiked] = useState(false)
 const PF = process.env.REACT_APP_PUBLIC_FOLDER
-
+const userId=localStorage.getItem("userId")
 //console.log(PF)
   const likeHandler =()=>{
     setLike(isLiked ? like-1 : like+1)
     setIsLiked(!isLiked)
   }
+console.log(post)
+// const fetchUsers = async () => {
 
-const fetchUsers = async () => {
+ const fetchUsers=async()=>{
+   try {
+   console.log(userId)
+     
 
-  try {
-    const res = await fetch(
-      BASEURL + `users/?userId=${post.userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res =  await fetch(BASEURL + 'users/'+post.userId, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
     setUsers(data);
   } catch (error) {
     console.log(error);
   }
+ 
 };
 
 useEffect(() => {
-  fetchUsers();
+fetchUsers()
 }, [post.userId]);
 //  console.log(post)
 
