@@ -11,7 +11,7 @@ router.get("/feed", async (req, res) => {
     const user = User.findById(req.params.userId);
     console.log(user)
     if (user) {
-      const pos=await Post.find({userId:req.params.userId})
+      const pos=await Post.find()
       res.status(200).json(pos);
     } else {
       res.status(403).json("you can update only your post");
