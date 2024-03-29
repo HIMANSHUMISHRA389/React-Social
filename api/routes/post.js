@@ -9,7 +9,6 @@ const Post = require("../models/Post.model");
 router.get("/feed", async (req, res) => {
   try {
     const user = User.findById(req.params.userId);
-    console.log(user)
     if (user) {
       const pos=await Post.find()
       res.status(200).json(pos);
@@ -111,7 +110,6 @@ router.get("/timeline/:userId", async (req, res) => {
 
 //get user's all posts
 router.get("/profile/:username", async (req, res) => {
-  console.log("hello")
   try {
     const user=await User.findOne({
       username:req.params.username

@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 router.get("/:userId", async (req, res) => {
   const userId = req.params.userId;
   // const username = req.query.username;
-  console.log("here",userId);
+ 
   try {
     const user = userId
       ? await User.findById(userId)
