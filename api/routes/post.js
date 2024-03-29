@@ -8,10 +8,10 @@ const Post = require("../models/Post.model");
 
 router.get("/feed", async (req, res) => {
   try {
-    const user = User.findById(req.body.userId);
+    const user = User.findById(req.params.userId);
+    console.log(user)
     if (user) {
-      const pos=await Post.find()
-    
+      const pos=await Post.find({userId:req.params.userId})
       res.status(200).json(pos);
     } else {
       res.status(403).json("you can update only your post");
@@ -111,6 +111,7 @@ router.get("/timeline/:userId", async (req, res) => {
 
 //get user's all posts
 router.get("/profile/:username", async (req, res) => {
+  console.log("hello")
   try {
     const user=await User.findOne({
       username:req.params.username
