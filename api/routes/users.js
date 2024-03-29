@@ -2,9 +2,9 @@ const User = require("../models/User.model");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 //get a user
-router.get("/", async (req, res) => {
-  const userId = req.query.userId;
-  const username = req.query.username;
+router.get("/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  // const username = req.query.username;
   console.log("here",userId);
   try {
     const user = userId
