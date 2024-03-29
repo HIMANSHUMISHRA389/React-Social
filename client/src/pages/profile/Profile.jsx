@@ -6,20 +6,24 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import {useState,useEffect }from "react"
 import { AuthContext } from '../../components/context/AuthContexts';
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
 export default function Profile() {
     const { user } = useContext(AuthContext);
     console.log(user)
-    const BASEURL = "http://localhost:8800/api/";
      const [users, setUsers] = useState([]);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { username } = useParams();
+     console.log(username)
   const fetchUsers = async () => {
     try {
-      const res = await fetch(BASEURL + `users?username=${user?.username}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        }, 
-      });
+      const res = 
+         await fetch(PF + `api/posts/profile/${username}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+        
       const data = await res.json();
       console.log(data);
       setUsers(data);
@@ -56,7 +60,7 @@ console.log(users)
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username={user.username} />
+            <Feed username={username} />
             <Rightbar user={users} />
           </div>
         </div>

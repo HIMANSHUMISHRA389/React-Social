@@ -18,25 +18,19 @@ export default function Feed({ username }) {
     console.log("username",username)
     console.log(user?.user?._id);
     try {
-      // const res = username!=undefined
-      //   ? await fetch(BASEURL + "posts/profile/" + username, {
-      //       method: "GET",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //     })
-      //   : await fetch(BASEURL + `posts/timeline/${userId}`, {
-      //       method: "GET",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //     });
-      const res=userId ? await fetch(BASEURL + `posts/feed`, {
+      const res = username!=undefined
+        ? await fetch(BASEURL + "posts/profile/" + username, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
-          }):""
+          })
+       : await fetch(BASEURL + `posts/feed`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
       const data = await res.json();
       console.log(data);
       if (data.length > 0) {

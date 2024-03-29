@@ -44,14 +44,14 @@ export default function Post({ post }) {
   useEffect(() => {
     fetchUsers();
   }, [post.userId]);
-  //  console.log(post)
+   console.log(users)
 
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`/api/posts/profile/${users.username}`}>
+            <Link to={`profile/${users.username}`}>
               <img
                 className="postProfileImg"
                 src={

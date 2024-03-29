@@ -4,33 +4,31 @@ import { Container } from "@chakra-ui/react";
 import Contact from "./components/Contact";
 import Conversation from "./components/Conversation";
 import io from "socket.io-client";
-import {AuthContext} from "../../components/context/AuthContexts"
-
-
+import { AuthContext } from "../../components/context/AuthContexts";
 const MainChat = () => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user } = useContext(AuthContext);
+  const userId = localStorage.getItem("userId") || user._id;
+  console.log(userId);
+  const getConversation = async () => {
+    try {
+      const res = await fetch(PF + "conversations/" + userId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-
-const {user}=useContext(AuthContext)
-const userId = localStorage.getItem("userId")||user._id
-console.log(userId)
- const getConversation = async () => {
-   try {
-     const res = await fetch("/conversations/" + userId);
-     const res1 = await res.json();
-     console.log(res1);
-   } catch (error) {
-     console.log(error);
-   }
- };
-
-useEffect(()=>{
- getConversation()
-},[userId])
-
-
-
-
+  useEffect(() => {
+    getConversation();
+  }, [userId]);
   return (
     <>
       <Container style={{ display: "flex", margin: "0", padding: "0" }}>
@@ -41,7 +39,7 @@ useEffect(()=>{
           <Contact />
         </Container>
         <Container flex="80vw" bg="#F6F6F6">
-          <Conversation  />
+          <Conversation />
         </Container>
       </Container>
     </>
