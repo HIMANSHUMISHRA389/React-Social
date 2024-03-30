@@ -1,28 +1,30 @@
 const router = require("express").Router();
 const Conversation = require("../models/Conversation");
 
-//new convo
-router.post("/", async (req, res) => {
-  const newConversation = new Conversation({
-    members: [req.body.senderId, req.body.receiverId],
-  });
+
+//post a message
+router.post("/",  async(req, res) => {
   try {
-    const savedConversation = await newConversation.save();
-    res.status(200).json(savedConversation);
+    const msg = new Conversation({
+      members: [req.body.senderId, req.body.receiverId],
+    });
+    const savedMsg = await msg.save()
+   res.status(200).send(savedMsg)
   } catch (error) {
-    res.status(500).json(error);
+    res.send(404).send(error);
   }
 });
 
-//get conv of new user
+//get a conversation based on userId
 router.get("/:userId", async (req, res) => {
   try {
-     const conversation = await Conversation.find({
-       members: { $in: [req.params.userId] },
-     });
-     res.status(200).json(conversation);
+    const search=req.params.userId
+    console.log(search)
+    const conve=await Conversation.find({ members: { $regex: search, $options: 'i' } })
+    res.status(200).send(conve);
   } catch (error) {
-    res.status(500).json(error);
+   res.send(404).send(error)
   }
 });
-module.exports = router;
+module.exports=router
+
