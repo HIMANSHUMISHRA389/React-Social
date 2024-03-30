@@ -9,12 +9,14 @@ const userRouter = require("./routes/users");
 const Post = require("./models/Post.model");
 const postRouter = require("./routes/post");
 const authRoute = require("./routes/auth");
+const messagesRoute = require("./routes/Message");
+const conversationRoute = require("./routes/Conversation");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const socketIo = require("socket.io");
 const http = require("http");
-const messages=require("./routes/Message")
-// const Conversation=require("./routes/Conversation")
+
+
 dotenv.config();
 const multer = require("multer");
 const cors = require("cors");
@@ -87,8 +89,8 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRouter);
-app.use("/api/msg",messages)
-// app.use("/api/conversation", Conversation);
+app.use("/api/msg",messagesRoute)
+app.use("/api/conversation", conversationRoute);
 mongoose
   .connect(uri, {})
   .then(() => console.log("Connected to MongoDB Atlas"))
