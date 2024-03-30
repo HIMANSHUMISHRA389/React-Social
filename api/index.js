@@ -10,7 +10,7 @@ const Post = require("./models/Post.model");
 const postRouter = require("./routes/post");
 const authRoute = require("./routes/auth");
 const messagesRoute = require("./routes/Message");
-const conversationRoute = require("./routes/Conversation");
+
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const socketIo = require("socket.io");
@@ -90,7 +90,7 @@ app.use("/api/users", userRouter);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRouter);
 app.use("/api/msg",messagesRoute)
-app.use("/api/conversation", conversationRoute);
+
 mongoose
   .connect(uri, {})
   .then(() => console.log("Connected to MongoDB Atlas"))
