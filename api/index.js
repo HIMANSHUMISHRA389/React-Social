@@ -14,7 +14,7 @@ const jwt = require("jsonwebtoken");
 const socketIo = require("socket.io");
 const http = require("http");
 const messages=require("./routes/Message")
-const Conversation=require("./routes/Conversation")
+// const Conversation=require("./routes/Conversation")
 dotenv.config();
 const multer = require("multer");
 const cors = require("cors");
@@ -88,7 +88,7 @@ app.use("/api/users", userRouter);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRouter);
 app.use("/api/msg",messages)
-app.use("/api/conversation", Conversation);
+// app.use("/api/conversation", Conversation);
 mongoose
   .connect(uri, {})
   .then(() => console.log("Connected to MongoDB Atlas"))
