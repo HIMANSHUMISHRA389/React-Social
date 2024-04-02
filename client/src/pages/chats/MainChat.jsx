@@ -10,25 +10,27 @@ const MainChat = () => {
   const { user } = useContext(AuthContext);
   const userId = localStorage.getItem("userId") || user._id;
   console.log(userId);
-  const getConversation = async () => {
+
+
+
+  const getAllConversation = async () => {
     try {
-      const res = await fetch(PF + "conversations/" + userId, {
+      const con = await fetch(PF + "api/conversation", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-
-      const data = await res.json();
-      console.log(data);
+      const res = await con.json();
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getConversation();
-  }, [userId]);
+    getAllConversation();
+  }, []);
   return (
     <>
       <Container style={{ display: "flex", margin: "0", padding: "0" }}>
